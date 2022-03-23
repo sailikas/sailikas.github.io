@@ -1,0 +1,1094 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>hadoop配置项2 | ECK`s Blog</title><meta name="keywords" content="集群,hadoop,配置"><meta name="author" content="StdAlone"><meta name="copyright" content="StdAlone"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一 信息初识虚拟化、大数据、Linux、SSH、Hadoop、HDFS、Hive等知识，了解软件定义数据中心，搜集、阅读和学习相关资料 绘制基于软件定义数据中心架构的大数据实训平台拓扑结构图  虚拟化   虚拟化，是指通过虚拟化技术将一台计算机虚拟为多台逻辑计算机。在一台计算机上同时运行多个逻辑计算机，每个逻辑计算机可运行不同的操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hadoop配置项2">
+<meta property="og:url" content="https://sailikas.github.io/2022/03/22/hadoop%E9%85%8D%E7%BD%AE%E9%A1%B9/index.html">
+<meta property="og:site_name" content="ECK&#96;s Blog">
+<meta property="og:description" content="一 信息初识虚拟化、大数据、Linux、SSH、Hadoop、HDFS、Hive等知识，了解软件定义数据中心，搜集、阅读和学习相关资料 绘制基于软件定义数据中心架构的大数据实训平台拓扑结构图  虚拟化   虚拟化，是指通过虚拟化技术将一台计算机虚拟为多台逻辑计算机。在一台计算机上同时运行多个逻辑计算机，每个逻辑计算机可运行不同的操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.hdslb.com/bfs/article/b28fc40e96ecf052215b2218e4a5b3b6e41ac4db.png">
+<meta property="article:published_time" content="2022-03-22T15:43:05.000Z">
+<meta property="article:modified_time" content="2022-03-23T02:54:55.846Z">
+<meta property="article:author" content="StdAlone">
+<meta property="article:tag" content="集群">
+<meta property="article:tag" content="hadoop">
+<meta property="article:tag" content="配置">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.hdslb.com/bfs/article/b28fc40e96ecf052215b2218e4a5b3b6e41ac4db.png"><link rel="shortcut icon" href="/img/head1.jpg"><link rel="canonical" href="https://sailikas.github.io/2022/03/22/hadoop%E9%85%8D%E7%BD%AE%E9%A1%B9/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"BDKLWS2Y1M","apiKey":"84ede66fc2ec22d0427da339a35f0cb6","indexName":"hexoBlog","hits":{"per_page":10},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'hadoop配置项2',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-03-23 10:54:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="referrer" content="never"><meta name="generator" content="Hexo 6.0.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fa-solid fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i0.hdslb.com/bfs/article/b28fc40e96ecf052215b2218e4a5b3b6e41ac4db.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ECK`s Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 总览</span></a></div><div class="menus_item"><a class="site-page" href="/photo/"><i class="fa-fw fa-solid fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">hadoop配置项2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-22T15:43:05.000Z" title="发表于 2022-03-22 23:43:05">2022-03-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-03-23T02:54:55.846Z" title="更新于 2022-03-23 10:54:55">2022-03-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="hadoop配置项2"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一-信息"><a href="#一-信息" class="headerlink" title="一 信息"></a>一 信息</h1><p>初识虚拟化、大数据、Linux、SSH、Hadoop、HDFS、Hive等知识，了解软件定义数据中心，搜集、阅读和学习相关资料</p>
+<p>绘制基于软件定义数据中心架构的大数据实训平台拓扑结构图</p>
+<ul>
+<li>虚拟化</li>
+</ul>
+<blockquote>
+<p>虚拟化，是指通过虚拟化技术将一台计算机虚拟为多台逻辑计算机。在一台计算机上同时运行多个逻辑计算机，每个逻辑计算机可运行不同的操作系统，并且应用程序都可以在相互独立的空间内运行而互不影响，从而显著提高计算机的工作效率。</p>
+<p>虚拟化使用软件的方法重新定义划分IT资源，可以实现IT资源的动态分配、灵活调度、跨域共享，提高IT资源利用率，使IT资源能够真正成为社会基础设施，服务于各行各业中灵活多变的应用需求。</p>
+</blockquote>
+<ul>
+<li>大数据</li>
+</ul>
+<blockquote>
+<p>大数据是指无法在一定时间内用常规软件工具对其内容进行抓取、管理和处理的数据集合。 大数据技术，是指从各种各样类型的数据中，快速获得有价值信息的能力。 适用于大数据的技术，包括大规模并行处理（MPP）数据库，数据挖掘电网，分布式文件系统，分布式数据库，云计算平台，互联网，和可扩展的存储系统。</p>
+</blockquote>
+<ul>
+<li>SSH</li>
+</ul>
+<blockquote>
+<p>SSH 为 [Secure Shell](<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Secure">https://baike.baidu.com/item/Secure</a> Shell) 的缩写，由 IETF 的网络小组（Network Working Group）所制定；SSH 为建立在应用层基础上的安全协议。SSH 是较可靠，专为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95/1071998">远程登录</a>会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。SSH最初是UNIX系统上的一个程序，后来又迅速扩展到其他操作平台。SSH在正确使用时可弥补网络中的漏洞。<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SSH%E5%AE%A2%E6%88%B7%E7%AB%AF/7091372">SSH客户端</a>适用于多种平台。几乎所有UNIX平台—包括<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HP-UX">HP-UX</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Linux">Linux</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/AIX">AIX</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Solaris/3517">Solaris</a>、Digital <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/UNIX">UNIX</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Irix">Irix</a>，以及其他平台，都可运行SSH。</p>
+</blockquote>
+<ul>
+<li>Hadoop</li>
+</ul>
+<blockquote>
+<p>Hadoop是一个由Apache基金会所开发的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/4905336">分布式系统</a>基础架构。用户可以在不了解分布式底层细节的情况下，开发分布式程序。充分利用集群的威力进行高速运算和存储。Hadoop实现了一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/1250388">分布式文件系统</a>（ Distributed File System），其中一个组件是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HDFS/4836121">HDFS</a>（Hadoop Distributed File System）。HDFS有高<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AE%B9%E9%94%99%E6%80%A7/9131391">容错性</a>的特点，并且设计用来部署在低廉的（low-cost）硬件上；而且它提供高吞吐量（high throughput）来访问<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/5985445">应用程序</a>的数据，适合那些有着超大数据集（large data set）的应用程序。HDFS放宽了（relax）<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/POSIX/3792413">POSIX</a>的要求，可以以流的形式访问（streaming access）文件系统中的数据。Hadoop的框架最核心的设计就是：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/HDFS/4836121">HDFS</a>和<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/MapReduce/133425">MapReduce</a>。HDFS为海量的数据提供了存储，而MapReduce则为海量的数据提供了计算。</p>
+</blockquote>
+<ul>
+<li>HDFS</li>
+</ul>
+<blockquote>
+<p>Hadoop<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/1250388">分布式文件系统</a>(HDFS)是指被设计成适合运行在通用硬件(commodity hardware)上的分布式文件系统（Distributed File System）。它和现有的分布式文件系统有很多共同点。但同时，它和其他的分布式文件系统的区别也是很明显的。HDFS是一个高度容错性的系统，适合部署在廉价的机器上。HDFS能提供高吞吐量的数据访问，非常适合大规模数据集上的应用。HDFS放宽了一部分POSIX约束，来实现流式读取文件系统数据的目的。HDFS在最开始是作为Apache Nutch搜索引擎项目的基础架构而开发的。HDFS是Apache Hadoop Core项目的一部分。</p>
+<p>HDFS有着高<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AE%B9%E9%94%99%E6%80%A7/9131391">容错性</a>（fault-tolerant）的特点，并且设计用来部署在低廉的（low-cost）硬件上。而且它提供高吞吐量（high throughput）来访问应用程序的数据，适合那些有着超大数据集（large data set）的应用程序。HDFS放宽了（relax）POSIX的要求（requirements）这样可以实现流的形式访问（streaming access）文件系统中的数据。</p>
+</blockquote>
+<ul>
+<li>Hive</li>
+</ul>
+<blockquote>
+<p>hive是基于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Hadoop/3526507">Hadoop</a>的一个<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93/381916">数据仓库</a>工具，用来进行数据提取、转化、加载，这是一种可以存储、查询和分析存储在Hadoop中的大规模数据的机制。hive数据仓库工具能将结构化的数据文件映射为一张数据库表，并提供<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SQL/86007">SQL</a>查询功能，能将<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/SQL%E8%AF%AD%E5%8F%A5/5714895">SQL语句</a>转变成<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/MapReduce/133425">MapReduce</a>任务来执行。Hive的优点是学习成本低，可以通过类似SQL语句实现快速MapReduce统计，使MapReduce变得更加简单，而不必开发专门的MapReduce应用程序。hive十分适合对数据仓库进行统计分析。</p>
+</blockquote>
+<p><img src="/./Paas/image-20220302191806074-16462198887831.png" alt="image-20220302191806074"></p>
+<h1 id="二-集群"><a href="#二-集群" class="headerlink" title="二 集群"></a>二 集群</h1><ul>
+<li>构建VMware服务器集群，配置网络，存储，CPU，内存，以及用户认证等信息</li>
+<li>构建虚拟化Linux服务器集群，配置用户认证、SSH面免密等</li>
+<li>构建基于虚拟化Linux服务器集群下的Hadoop应用环境，安装JDK，Hadoop等应用软件，并完成集群配置，启动集群</li>
+</ul>
+<h2 id="2-1-Hadoop基础模板"><a href="#2-1-Hadoop基础模板" class="headerlink" title="2.1 Hadoop基础模板"></a><strong>2.1 Hadoop基础模板</strong></h2><p><img src="/./Paas/image-20220302192906907-16462205486882.png" alt="Hadoop基础模板"></p>
+<p>说明：</p>
+<p>NAT 静态网络</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/sysconfig/network-script/ifcfg-ens33</span><br></pre></td></tr></table></figure>
+
+<p>SSH免密</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>存储：20G(动态)</p>
+<p>内存：2G(最低)</p>
+<p>Root密码：123456</p>
+<h2 id="2-2-Hadoop集群模板"><a href="#2-2-Hadoop集群模板" class="headerlink" title="2.2 Hadoop集群模板"></a><strong>2.2 Hadoop集群模板</strong></h2><h3 id="2-2-1-core-site-xml配置信息"><a href="#2-2-1-core-site-xml配置信息" class="headerlink" title="2.2.1 core-site.xml配置信息"></a>2.2.1 core-site.xml配置信息</h3><p><img src="/./Paas/image-20220303074902651-16462649451451.png" alt="core-site"></p>
+
+
+<h4 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h4><table>
+<thead>
+<tr>
+<th>name</th>
+<th>value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fs.default.name</td>
+<td>hdfs:&#x2F;&#x2F;hadoopmaster:9000</td>
+<td>定义HadoopMaster的URI和端口</td>
+</tr>
+<tr>
+<td>fs.checkpoint.dir</td>
+<td>&#x2F;opt&#x2F;data&#x2F;hadoop1&#x2F;hdfs&#x2F;namesecondary1</td>
+<td>定义hadoop的name备份的路径，官方文档说是读取这个，写入dfs.name.dir</td>
+</tr>
+<tr>
+<td>fs.checkpoint.period</td>
+<td>1800</td>
+<td>定义name备份的备份间隔时间，秒为单位，只对snn生效，默认一小时</td>
+</tr>
+<tr>
+<td>fs.checkpoint.size</td>
+<td>33554432</td>
+<td>以日志大小间隔做备份间隔，只对snn生效，默认64M</td>
+</tr>
+<tr>
+<td>io.compression.codecs</td>
+<td>org.apache.hadoop.io.compress.DefaultCodec com.hadoop.compression.lzo.LzoCodec com.hadoop.compression.lzo.LzopCodec org.apache.hadoop.io.compress.GzipCodec org.apache.hadoop.io.compress.BZip2Codec (排版调整，实际配置不要回车)</td>
+<td>Hadoop所使用的编解码器，gzip和bzip2为自带，lzo需安装hadoopgpl或者kevinweil，逗号分隔，snappy也需要单独安装</td>
+</tr>
+<tr>
+<td>io.compression.codec.lzo.class</td>
+<td>com.hadoop.compression.lzo.LzoCodec</td>
+<td>LZO所使用的压缩编码器</td>
+</tr>
+<tr>
+<td>topology.script.file.name</td>
+<td>&#x2F;hadoop&#x2F;bin&#x2F;RackAware.py</td>
+<td>机架感知脚本位置</td>
+</tr>
+<tr>
+<td>topology.script.number.args</td>
+<td>1000</td>
+<td>机架感知脚本管理的主机数，IP地址</td>
+</tr>
+<tr>
+<td>fs.trash.interval</td>
+<td>10800</td>
+<td>HDFS垃圾箱设置，可以恢复误删除，分钟数，0为禁用，添加该项无需重启hadoop</td>
+</tr>
+<tr>
+<td>hadoop.http.filter.initializers</td>
+<td>org.apache.hadoop.security. AuthenticationFilterInitializer (排版调整，实际配置不要回车)</td>
+<td>需要jobtracker,tasktracker namenode,datanode等http访问端口用户验证使用，需配置所有节点</td>
+</tr>
+<tr>
+<td>hadoop.http.authentication.type</td>
+<td>simple | kerberos |</td>
+<td>验证方式，默认为简单，也可自己定义class,需配置所有节点</td>
+</tr>
+<tr>
+<td>hadoop.http.authentication. token.validity (排版调整，实际配置不要回车)</td>
+<td>36000</td>
+<td>验证令牌的有效时间,需配置所有节点</td>
+</tr>
+<tr>
+<td>hadoop.http.authentication. signature.secret (排版调整，实际配置不要回车)</td>
+<td>默认可不写参数</td>
+<td>默认不写在hadoop启动时自动生成私密签名,需配置所有节点</td>
+</tr>
+<tr>
+<td>hadoop.http.authentication.cookie .domain</td>
+<td>domian.tld</td>
+<td>http验证所使用的cookie的域名，IP地址访问则该项无效，必须给所有节点都配置域名才可以。</td>
+</tr>
+<tr>
+<td>hadoop.http.authentication.  simple.anonymous.allowed (排版调整，实际配置不要回车)</td>
+<td>true | false</td>
+<td>简单验证专用，默认允许匿名访问，true</td>
+</tr>
+<tr>
+<td>hadoop.http.authentication. kerberos.principal (排版调整，实际配置不要回车)</td>
+<td>HTTP&#x2F;localhost@$LOCALHOST</td>
+<td>Kerberos验证专用，参加认证的实体机必须使用HTTP作为K的Name</td>
+</tr>
+<tr>
+<td>hadoop.http.authentication. kerberos.keytab (排版调整，实际配置不要回车)</td>
+<td>&#x2F;home&#x2F;xianglei&#x2F;hadoop.keytab</td>
+<td>Kerberos验证专用，密钥文件存放位置</td>
+</tr>
+<tr>
+<td>hadoop.security.authorization</td>
+<td>true|false</td>
+<td>Hadoop服务层级验证安全验证，需配合hadoop-policy.xml使用，配置好以后用dfsadmin,mradmin -refreshServiceAcl刷新生效</td>
+</tr>
+<tr>
+<td>io.file.buffer.size</td>
+<td>131072</td>
+<td>用作序列化文件处理时读写buffer的大小</td>
+</tr>
+<tr>
+<td>hadoop.security.authentication</td>
+<td>simple | kerberos</td>
+<td>hadoop本身的权限验证，非http访问，simple或者kerberos</td>
+</tr>
+<tr>
+<td>hadoop.logfile.size</td>
+<td>1000000000</td>
+<td>设置日志文件大小，超过则滚动新日志</td>
+</tr>
+<tr>
+<td>hadoop.logfile.count</td>
+<td>20</td>
+<td>最大日志数</td>
+</tr>
+<tr>
+<td>io.bytes.per.checksum</td>
+<td>1024</td>
+<td>每校验码所校验的字节数，不要大于io.file.buffer.size</td>
+</tr>
+<tr>
+<td>io.skip.checksum.errors</td>
+<td>true | false</td>
+<td>处理序列化文件时跳过校验码错误，不抛异常。默认false</td>
+</tr>
+<tr>
+<td>io.serializations</td>
+<td>org.apache.hadoop.io. serializer.WritableSerialization (排版需要。实际配置不要回车)</td>
+<td>序列化的编解码器</td>
+</tr>
+<tr>
+<td>io.seqfile.compress.blocksize</td>
+<td>1024000</td>
+<td>块压缩的序列化文件的最小块大小，字节</td>
+</tr>
+<tr>
+<td>webinterface.private.actions</td>
+<td>true | false</td>
+<td>设为true，则JT和NN的tracker网页会出现杀任务删文件等操作连接，默认是false</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-2-hdfs-site-xml配置信息"><a href="#2-2-2-hdfs-site-xml配置信息" class="headerlink" title="2.2.2 hdfs-site.xml配置信息"></a>2.2.2 hdfs-site.xml配置信息</h3><p><img src="/./Paas/image-20220303074955311-16462649967772.png" alt="hdfs-site.xml"></p>
+<h4 id="配置说明-1"><a href="#配置说明-1" class="headerlink" title="配置说明"></a>配置说明</h4><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>参数名</th>
+<th>参数值</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>dfs.namenode.logging.level</td>
+<td>info</td>
+<td>输出日志类型</td>
+</tr>
+<tr>
+<td>2</td>
+<td>dfs.secondary.http.address</td>
+<td>0.0.0.0:50090</td>
+<td>备份名称节点的http协议访问地址与端口</td>
+</tr>
+<tr>
+<td>3</td>
+<td>dfs.datanode.address</td>
+<td>0.0.0.0:50010</td>
+<td>数据节点的TCP管理服务地址和端口</td>
+</tr>
+<tr>
+<td>4</td>
+<td>dfs.datanode.http.address</td>
+<td>0.0.0.0:50075</td>
+<td>数据节点的HTTP协议访问地址和端口</td>
+</tr>
+<tr>
+<td>5</td>
+<td>dfs.datanode.ipc.address</td>
+<td>0.0.0.0:50020</td>
+<td>数据节点的IPC服务访问地址和端口</td>
+</tr>
+<tr>
+<td>6</td>
+<td>dfs.datanode.handler.count</td>
+<td>3</td>
+<td>数据节点的服务连接处理线程数</td>
+</tr>
+<tr>
+<td>7</td>
+<td>dfs.http.address</td>
+<td>0.0.0.0:50070</td>
+<td>名称节点的http协议访问地址与端口</td>
+</tr>
+<tr>
+<td>8</td>
+<td>dfs.https.enable</td>
+<td>false</td>
+<td>支持https访问方式标识</td>
+</tr>
+<tr>
+<td>9</td>
+<td>dfs.https.need.client.auth</td>
+<td>false</td>
+<td>客户端指定https访问标识</td>
+</tr>
+<tr>
+<td>10</td>
+<td>dfs.https.server.keystore.resource</td>
+<td>ssl-server.xml</td>
+<td>Ssl密钥服务端的配置文件</td>
+</tr>
+<tr>
+<td>11</td>
+<td>dfs.https.client.keystore.resource</td>
+<td>ssl-client.xml</td>
+<td>Ssl密钥客户端的配置文件</td>
+</tr>
+<tr>
+<td>12</td>
+<td>dfs.datanode.https.address</td>
+<td>0.0.0.0:50475</td>
+<td>数据节点的HTTPS协议访问地址和端口</td>
+</tr>
+<tr>
+<td>13</td>
+<td>dfs.https.address</td>
+<td>0.0.0.0:50470</td>
+<td>名称节点的HTTPS协议访问地址和端口</td>
+</tr>
+<tr>
+<td>14</td>
+<td>dfs.datanode.dns.interface</td>
+<td>default</td>
+<td>数据节点采用IP地址标识</td>
+</tr>
+<tr>
+<td>15</td>
+<td>dfs.datanode.dns.nameserver</td>
+<td>default</td>
+<td>指定DNS的IP地址</td>
+</tr>
+<tr>
+<td>16</td>
+<td>dfs.replication.considerLoad</td>
+<td>true</td>
+<td>加载目标或不加载的标识</td>
+</tr>
+<tr>
+<td>17</td>
+<td>dfs.default.chunk.view.size</td>
+<td>32768</td>
+<td>浏览时的文件块大小设置为32K</td>
+</tr>
+<tr>
+<td>18</td>
+<td>dfs.datanode.du.reserved</td>
+<td>0</td>
+<td>每个卷预留的空闲空间数量</td>
+</tr>
+<tr>
+<td>19</td>
+<td>dfs.name.dir</td>
+<td>${hadoop.tmp.dir}&#x2F;dfs&#x2F;name</td>
+<td>存贮在本地的名字节点数据镜象的目录,作为名字节点的冗余备份</td>
+</tr>
+<tr>
+<td>20</td>
+<td>dfs.name.edits.dir</td>
+<td>${dfs.name.dir}</td>
+<td>存贮文件操作过程信息的存贮目录</td>
+</tr>
+<tr>
+<td>21</td>
+<td>dfs.web.ugi</td>
+<td>webuser,webgroup</td>
+<td>Web接口访问的用户名和组的帐户设定</td>
+</tr>
+<tr>
+<td>22</td>
+<td>dfs.permissions</td>
+<td>true</td>
+<td>文件操作时的权限检查标识。</td>
+</tr>
+<tr>
+<td>23</td>
+<td>dfs.permissions.supergroup</td>
+<td>supergroup</td>
+<td>超级用户的组名定义</td>
+</tr>
+<tr>
+<td>24</td>
+<td>dfs.block.access.token.enable</td>
+<td>false</td>
+<td>数据节点访问令牌标识</td>
+</tr>
+<tr>
+<td>25</td>
+<td>dfs.block.access.key.update.interval</td>
+<td>600</td>
+<td>升级访问钥时的间隔时间</td>
+</tr>
+<tr>
+<td>26</td>
+<td>dfs.block.access.token.lifetime</td>
+<td>600</td>
+<td>访问令牌的有效时间</td>
+</tr>
+<tr>
+<td>27</td>
+<td>dfs.data.dir</td>
+<td>${hadoop.tmp.dir}&#x2F;dfs&#x2F;data</td>
+<td>数据节点的块本地存放目录</td>
+</tr>
+<tr>
+<td>28</td>
+<td>dfs.datanode.data.dir.perm</td>
+<td>755</td>
+<td>数据节点的存贮块的目录访问权限设置</td>
+</tr>
+<tr>
+<td>29</td>
+<td>dfs.replication</td>
+<td>3</td>
+<td>缺省的块复制数量</td>
+</tr>
+<tr>
+<td>30</td>
+<td>dfs.replication.max</td>
+<td>512</td>
+<td>块复制的最大数量</td>
+</tr>
+<tr>
+<td>31</td>
+<td>dfs.replication.min</td>
+<td>1</td>
+<td>块复制的最小数量</td>
+</tr>
+<tr>
+<td>32</td>
+<td>dfs.block.size</td>
+<td>67108864</td>
+<td>缺省的文件块大小为64M</td>
+</tr>
+<tr>
+<td>33</td>
+<td>dfs.df.interval</td>
+<td>60000</td>
+<td>磁盘空间统计间隔为6秒</td>
+</tr>
+<tr>
+<td>34</td>
+<td>dfs.client.block.write.retries</td>
+<td>3</td>
+<td>块写入出错时的重试次数</td>
+</tr>
+<tr>
+<td>35</td>
+<td>dfs.blockreport.intervalMsec</td>
+<td>3600000</td>
+<td>块的报告间隔时为1小时</td>
+</tr>
+<tr>
+<td>36</td>
+<td>dfs.blockreport.initialDelay</td>
+<td>0</td>
+<td>块顺序报告的间隔时间</td>
+</tr>
+<tr>
+<td>37</td>
+<td>dfs.heartbeat.interval</td>
+<td>3</td>
+<td>数据节点的心跳检测间隔时间</td>
+</tr>
+<tr>
+<td>38</td>
+<td>dfs.namenode.handler.count</td>
+<td>10</td>
+<td>名称节点的连接处理的线程数量</td>
+</tr>
+<tr>
+<td>39</td>
+<td>dfs.safemode.threshold.pct</td>
+<td>0.999f</td>
+<td>启动安全模式的阀值设定</td>
+</tr>
+<tr>
+<td>40</td>
+<td>dfs.safemode.extension</td>
+<td>30000</td>
+<td>当阀值达到量值后扩展的时限</td>
+</tr>
+<tr>
+<td>41</td>
+<td>dfs.balance.bandwidthPerSec</td>
+<td>1048576</td>
+<td>启动负载均衡的数据节点可利用带宽最大值为1M</td>
+</tr>
+<tr>
+<td>42</td>
+<td>dfs.hosts</td>
+<td></td>
+<td>可与名称节点连接的主机地址文件指定。</td>
+</tr>
+<tr>
+<td>43</td>
+<td>dfs.hosts.exclude</td>
+<td></td>
+<td>不充计与名称节点连接的主机地址文件设定</td>
+</tr>
+<tr>
+<td>44</td>
+<td>dfs.max.objects</td>
+<td>0</td>
+<td>文件数、目录数、块数的最大数量</td>
+</tr>
+<tr>
+<td>45</td>
+<td>dfs.namenode.decommission.interval</td>
+<td>30</td>
+<td>名称节点解除命令执行时的监测时间周期</td>
+</tr>
+<tr>
+<td>46</td>
+<td>dfs.namenode.decommission.nodes.per.interval</td>
+<td>5</td>
+<td>名称节点解除命令执行是否完检测次数</td>
+</tr>
+<tr>
+<td>47</td>
+<td>dfs.replication.interval</td>
+<td>3</td>
+<td>名称节点计算数据节点的复制工作的周期数.</td>
+</tr>
+<tr>
+<td>48</td>
+<td>dfs.access.time.precision</td>
+<td>3600000</td>
+<td>充许访问文件的时间精确到1小时</td>
+</tr>
+<tr>
+<td>49</td>
+<td>dfs.support.append</td>
+<td>false</td>
+<td>是否充许链接文件指定</td>
+</tr>
+<tr>
+<td>50</td>
+<td>dfs.namenode.delegation.key.update-interval</td>
+<td>86400000</td>
+<td>名称节点上的代理令牌的主key的更新间隔时间为24小时</td>
+</tr>
+<tr>
+<td>51</td>
+<td>dfs.namenode.delegation.token.max-lifetime</td>
+<td>604800000</td>
+<td>代理令牌的有效时间最大值为7天</td>
+</tr>
+<tr>
+<td>52</td>
+<td>dfs.namenode.delegation.token.renew-interval</td>
+<td>86400000</td>
+<td>代理令牌的更新时间为24小时</td>
+</tr>
+<tr>
+<td>53</td>
+<td>dfs.datanode.failed.volumes.tolerated</td>
+<td>0</td>
+<td>决定停止数据节点提供服务充许卷的出错次数。0次则任何卷出错都要停止数据节点</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-3-mapred-site-xml配置信息"><a href="#2-2-3-mapred-site-xml配置信息" class="headerlink" title="2.2.3 mapred-site.xml配置信息"></a>2.2.3 mapred-site.xml配置信息</h3><p><img src="/./Paas/image-20220303075035739.png" alt="mapred-site.xml"></p>
+<h4 id="配置说明-2"><a href="#配置说明-2" class="headerlink" title="配置说明"></a>配置说明</h4><table>
+<thead>
+<tr>
+<th>name</th>
+<th>value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hadoop.job.history.location</td>
+<td></td>
+<td>job历史文件保存路径，无可配置参数，也不用写在配置文件里，默认在logs的history文件夹下。</td>
+</tr>
+<tr>
+<td>hadoop.job.history.user.location</td>
+<td></td>
+<td>用户历史文件存放位置</td>
+</tr>
+<tr>
+<td>io.sort.factor</td>
+<td>30</td>
+<td>这里处理流合并时的文件排序数，我理解为排序时打开的文件数</td>
+</tr>
+<tr>
+<td>io.sort.mb</td>
+<td>600</td>
+<td>排序所使用的内存数量，单位兆，默认1，我记得是不能超过mapred.child.java.opt设置，否则会OOM</td>
+</tr>
+<tr>
+<td>mapred.job.tracker</td>
+<td>hadoopmaster:9001</td>
+<td>连接jobtrack服务器的配置项，默认不写是local，map数1，reduce数1</td>
+</tr>
+<tr>
+<td>mapred.job.tracker.http.address</td>
+<td>0.0.0.0:50030</td>
+<td>jobtracker的tracker页面服务监听地址</td>
+</tr>
+<tr>
+<td>mapred.job.tracker.handler.count</td>
+<td>15</td>
+<td>jobtracker服务的线程数</td>
+</tr>
+<tr>
+<td>mapred.task.tracker.report.address</td>
+<td>127.0.0.1:0</td>
+<td>tasktracker监听的服务器，无需配置，且官方不建议自行修改</td>
+</tr>
+<tr>
+<td>mapred.local.dir</td>
+<td>&#x2F;data1&#x2F;hdfs&#x2F;mapred&#x2F;local, &#x2F;data2&#x2F;hdfs&#x2F;mapred&#x2F;local, …</td>
+<td>mapred做本地计算所使用的文件夹，可以配置多块硬盘，逗号分隔</td>
+</tr>
+<tr>
+<td>mapred.system.dir</td>
+<td>&#x2F;data1&#x2F;hdfs&#x2F;mapred&#x2F;system, &#x2F;data2&#x2F;hdfs&#x2F;mapred&#x2F;system, …</td>
+<td>mapred存放控制文件所使用的文件夹，可配置多块硬盘，逗号分隔。</td>
+</tr>
+<tr>
+<td>mapred.temp.dir</td>
+<td>&#x2F;data1&#x2F;hdfs&#x2F;mapred&#x2F;temp, &#x2F;data2&#x2F;hdfs&#x2F;mapred&#x2F;temp, …</td>
+<td>mapred共享的临时文件夹路径，解释同上。</td>
+</tr>
+<tr>
+<td>mapred.local.dir.minspacestart</td>
+<td>1073741824</td>
+<td>本地运算文件夹剩余空间低于该值则不在本地做计算。字节配置，默认0</td>
+</tr>
+<tr>
+<td>mapred.local.dir.minspacekill</td>
+<td>1073741824</td>
+<td>本地计算文件夹剩余空间低于该值则不再申请新的任务，字节数，默认0</td>
+</tr>
+<tr>
+<td>mapred.tasktracker.expiry.interval</td>
+<td>60000</td>
+<td>TT在这个时间内没有发送心跳，则认为TT已经挂了。单位毫秒</td>
+</tr>
+<tr>
+<td>mapred.map.tasks</td>
+<td>2</td>
+<td>默认每个job所使用的map数，意思是假设设置dfs块大小为64M，需要排序一个60M的文件，也会开启2个map线程，当jobtracker设置为本地是不起作用。</td>
+</tr>
+<tr>
+<td>mapred.reduce.tasks</td>
+<td>1</td>
+<td>解释同上</td>
+</tr>
+<tr>
+<td>mapred.jobtracker.restart.recover</td>
+<td>true | false</td>
+<td>重启时开启任务恢复，默认false</td>
+</tr>
+<tr>
+<td>mapred.jobtracker.taskScheduler</td>
+<td>org.apache.hadoop.mapred. CapacityTaskScheduler  org.apache.hadoop.mapred. JobQueueTaskScheduler  org.apache.hadoop.mapred. FairScheduler</td>
+<td>重要的东西，开启任务管理器，不设置的话，hadoop默认是FIFO调度器，其他可以使用公平和计算能力调度器</td>
+</tr>
+<tr>
+<td>mapred.reduce.parallel.copies</td>
+<td>10</td>
+<td>reduce在shuffle阶段使用的并行复制数，默认5</td>
+</tr>
+<tr>
+<td>mapred.child.java.opts</td>
+<td>-Xmx2048m-Djava.library.path&#x3D; &#x2F;opt&#x2F;hadoopgpl&#x2F;native&#x2F; <a target="_blank" rel="noopener" href="http://lib.csdn.net/base/linux">Linux</a>-amd64-64</td>
+<td>每个TT子进程所使用的虚拟机内存大小</td>
+</tr>
+<tr>
+<td>tasktracker.http.threads</td>
+<td>50</td>
+<td>TT用来跟踪task任务的http server的线程数</td>
+</tr>
+<tr>
+<td>mapred.task.tracker.http.address</td>
+<td>0.0.0.0:50060</td>
+<td>TT默认监听的httpIP和端口，默认可以不写。端口写0则随机使用。</td>
+</tr>
+<tr>
+<td>mapred.output.compress</td>
+<td>true | false</td>
+<td>任务结果采用压缩输出，默认false，建议false</td>
+</tr>
+<tr>
+<td>mapred.output.compression.codec</td>
+<td>org.apache.hadoop.io. compress.DefaultCodec</td>
+<td>输出结果所使用的编解码器，也可以用gz或者bzip2或者lzo或者snappy等</td>
+</tr>
+<tr>
+<td>mapred.compress.map.output</td>
+<td>true | false</td>
+<td>map输出结果在进行网络交换前是否以压缩格式输出，默认false，建议true，可以减小带宽占用，代价是会慢一些。</td>
+</tr>
+<tr>
+<td>mapred.map.output.compression.codec</td>
+<td>com.hadoop.compression. lzo.LzoCodec</td>
+<td>map阶段压缩输出所使用的编解码器</td>
+</tr>
+<tr>
+<td>map.sort.class</td>
+<td>org.apache.hadoop.util. QuickSort</td>
+<td>map输出排序所使用的算法，默认快排。</td>
+</tr>
+<tr>
+<td>mapred.hosts</td>
+<td>conf&#x2F;mhost.allow</td>
+<td>允许连接JT的TT服务器列表，空值全部允许</td>
+</tr>
+<tr>
+<td>mapred.hosts.exclude</td>
+<td>conf&#x2F;mhost.deny</td>
+<td>禁止连接JT的TT列表，节点摘除是很有作用。</td>
+</tr>
+<tr>
+<td>mapred.queue.names</td>
+<td>ETL,rush,default</td>
+<td>配合调度器使用的队列名列表，逗号分隔</td>
+</tr>
+<tr>
+<td>mapred.tasktracker.map. tasks.maximum</td>
+<td>12</td>
+<td>每服务器允许启动的最大map槽位数。</td>
+</tr>
+<tr>
+<td>mapred.tasktracker.reduce. tasks.maximum</td>
+<td>6</td>
+<td>每服务器允许启动的最大reduce槽位数</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-4-yarn-site-xml配置信息"><a href="#2-2-4-yarn-site-xml配置信息" class="headerlink" title="2.2.4 yarn-site.xml配置信息"></a>2.2.4 yarn-site.xml配置信息</h3><p><img src="/./Paas/image-20220303075153454-16462651152243.png" alt="yarn-site.xml"></p>
+<h4 id="配置说明-3"><a href="#配置说明-3" class="headerlink" title="配置说明"></a>配置说明</h4><h5 id="ResourceManager相关配置参数"><a href="#ResourceManager相关配置参数" class="headerlink" title="ResourceManager相关配置参数"></a>ResourceManager相关配置参数</h5><ul>
+<li>（1） <code>yarn.resourcemanager.address</code><br>参数解释：ResourceManager 对客户端暴露的地址。客户端通过该地址向RM提交应用程序，杀死应用程序等。<br>默认值：${yarn.resourcemanager.hostname}:8032</li>
+<li>（2） <code>yarn.resourcemanager.scheduler.address</code><br>参数解释：ResourceManager 对ApplicationMaster暴露的访问地址。ApplicationMaster通过该地址向RM申请资源、释放资源等。<br>默认值：${yarn.resourcemanager.hostname}:8030</li>
+<li>（3） <code>yarn.resourcemanager.resource-tracker.address</code><br>参数解释：ResourceManager 对NodeManager暴露的地址.。NodeManager通过该地址向RM汇报心跳，领取任务等。<br>默认值：${yarn.resourcemanager.hostname}:8031</li>
+<li>（4） <code>yarn.resourcemanager.admin.address</code><br>参数解释：ResourceManager 对管理员暴露的访问地址。管理员通过该地址向RM发送管理命令等。<br>默认值：${yarn.resourcemanager.hostname}:8033</li>
+<li>（5） <code>yarn.resourcemanager.webapp.address</code><br>参数解释：ResourceManager对外web ui地址。用户可通过该地址在浏览器中查看集群各类信息。<br>默认值：${yarn.resourcemanager.hostname}:8088</li>
+<li>（6） <code>yarn.resourcemanager.scheduler.class</code><br>参数解释：启用的资源调度器主类。目前可用的有FIFO、Capacity Scheduler和Fair Scheduler。<br>默认值：<br>org.apache.hadoop.yarn.server.resourcemanager.scheduler.capacity.CapacityScheduler</li>
+<li>（7） <code>yarn.resourcemanager.resource-tracker.client.thread-count</code><br>参数解释：处理来自NodeManager的RPC请求的Handler数目。<br>默认值：50</li>
+<li>（8） <code>yarn.resourcemanager.scheduler.client.thread-count</code><br>参数解释：处理来自ApplicationMaster的RPC请求的Handler数目。<br>默认值：50</li>
+<li>（9） <code>yarn.scheduler.minimum-allocation-mb/ yarn.scheduler.maximum-allocation-mb</code><br>参数解释：单个可申请的最小&#x2F;最大内存资源量。比如设置为1024和3072，则运行MapRedce作业时，每个Task最少可申请1024MB内存，最多可申请3072MB内存。<br>默认值：1024&#x2F;8192</li>
+<li>（10） <code>yarn.scheduler.minimum-allocation-vcores / yarn.scheduler.maximum-allocation-vcores</code><br>参数解释：单个可申请的最小&#x2F;最大虚拟CPU个数。比如设置为1和4，则运行MapRedce作业时，每个Task最少可申请1个虚拟CPU，最多可申请4个虚拟CPU。什么是虚拟CPU，可阅读我的这篇文章：“YARN 资源调度器剖析”。<br>默认值：1&#x2F;32</li>
+<li>（11） <code>yarn.resourcemanager.nodes.include-path /yarn.resourcemanager.nodes.exclude-path</code><br>参数解释：NodeManager黑白名单。如果发现若干个NodeManager存在问题，比如故障率很高，任务运行失败率高，则可以将之加入黑名单中。注意，这两个配置参数可以动态生效。（调用一个refresh命令即可）<br>默认值：“”</li>
+<li>（12） <code>yarn.resourcemanager.nodemanagers.heartbeat-interval-ms</code><br>参数解释：NodeManager心跳间隔<br>默认值：1000（毫秒）</li>
+</ul>
+<h5 id="NodeManager相关配置参数"><a href="#NodeManager相关配置参数" class="headerlink" title="NodeManager相关配置参数"></a>NodeManager相关配置参数</h5><ul>
+<li>（1） <code>yarn.nodemanager.resource.memory-mb</code><br>参数解释：NodeManager总的可用物理内存。注意，该参数是不可修改的，一旦设置，整个运行过程中不可动态修改。另外，该参数的默认值是8192MB，即使你的机器内存不够8192MB，YARN也会按照这些内存来使用（傻不傻？），因此，这个值通过一定要配置。不过，Apache已经正在尝试将该参数做成可动态修改的。<br>默认值：8192</li>
+<li>（2） <code>yarn.nodemanager.vmem-pmem-ratio</code><br>参数解释：每使用1MB物理内存，最多可用的虚拟内存数。<br>默认值：2.1</li>
+<li>（3） <code>yarn.nodemanager.resource.cpu-vcores</code><br>参数解释：NodeManager总的可用虚拟CPU个数。<br>默认值：8</li>
+<li>（4） <code>yarn.nodemanager.local-dirs</code><br>参数解释：中间结果存放位置，类似于1.0中的mapred.local.dir。注意，这个参数通常会配置多个目录，已分摊磁盘IO负载。<br>默认值：${hadoop.tmp.dir}&#x2F;nm-local-dir</li>
+<li>（5） <code>yarn.nodemanager.log-dirs</code><br>参数解释：日志存放地址（可配置多个目录）。<br>默认值：${yarn.log.dir}&#x2F;userlogs</li>
+<li>（6） <code>yarn.nodemanager.log.retain-seconds</code><br>参数解释：NodeManager上日志最多存放时间（不启用日志聚集功能时有效）。<br>默认值：10800（3小时）</li>
+<li>（7） <code>yarn.nodemanager.aux-services</code><br>参数解释：NodeManager上运行的附属服务。需配置成mapreduce_shuffle，才可运行MapReduce程序<br>默认值：“”</li>
+</ul>
+<h3 id="2-2-5-salves信息"><a href="#2-2-5-salves信息" class="headerlink" title="2.2.5 salves信息"></a>2.2.5 salves信息</h3><p><img src="/./Paas/image-20220303075237951.png" alt="salves"></p>
+<p>根据部署数量修改相应的节点名称</p>
+<h3 id="2-2-6-迁移与部署"><a href="#2-2-6-迁移与部署" class="headerlink" title="2.2.6 迁移与部署"></a>2.2.6 迁移与部署</h3><h4 id="2-2-6-1-迁移"><a href="#2-2-6-1-迁移" class="headerlink" title="2.2.6.1 迁移"></a>2.2.6.1 迁移</h4><p>在迁移时应注意网卡的HWADDR,IPV4,GATEWAY,NETMASK，按照实际同时修改<code>/etc/hosts</code>，<code>/etc/hostname</code></p>
+<h4 id="2-2-6-2-部署"><a href="#2-2-6-2-部署" class="headerlink" title="2.2.6.2 部署"></a>2.2.6.2 部署</h4><p>网卡同上，若需要改变集群数量，参考<strong>配置说明</strong>，并同时修改<strong>salves</strong>信息</p>
+<h3 id="2-2-7-DEMO"><a href="#2-2-7-DEMO" class="headerlink" title="2.2.7 DEMO"></a>2.2.7 DEMO</h3><h5 id="2-2-7-1-CRUD"><a href="#2-2-7-1-CRUD" class="headerlink" title="2.2.7.1 CRUD"></a>2.2.7.1 CRUD</h5><p>测试软件：IDEA</p>
+<p>实现方式：Java，Hadoop Java Api</p>
+<p><img src="/./Paas/image-20220303161126304.png" alt="Hadoop Java API"></p>
+<h1 id="三-组件"><a href="#三-组件" class="headerlink" title="三 组件"></a>三 组件</h1><ul>
+<li>HBase集群环境部署，在已经部署完成的Hadoop集群中完成HBase集群部署</li>
+<li>Zookeeper分布式集群的部署</li>
+<li>Hive数据仓库集群环境部署</li>
+</ul>
+<h2 id="3-1-HBase"><a href="#3-1-HBase" class="headerlink" title="3.1 HBase"></a>3.1 HBase</h2><h3 id="3-1-1-HBase-的安装与配置"><a href="#3-1-1-HBase-的安装与配置" class="headerlink" title="3.1.1 HBase 的安装与配置"></a>3.1.1 HBase 的安装与配置</h3><p>安装 Java、SSH 和 Hadoop 以后，接下来要安装配置 HBase。HBase 的运行模式包括单机、伪分布式和分布式三种。</p>
+<p>单机模式使用本地文件系统，所有进程运行在一个 JVM 上，单机模式一 般只用于测试，HBase 需要结合 Hadoop 才能展现出其分布式存储的能力。</p>
+<p>伪分布式和分布式模式是一种主从模式，基本由一个 Master 节点和多个 Slave 节点组成，均使用 HDFS 作为底层文件系统。但伪分布式模式下，所有进程运行在一个 JVM 上，可以进行小集群的配置，用于测试。在生产环境下，需要在不同机器上的 JVM 中运行守护进程。</p>
+<h4 id="3-1-1-1-修改配置文件"><a href="#3-1-1-1-修改配置文件" class="headerlink" title="3.1.1.1 修改配置文件"></a>3.1.1.1 修改配置文件</h4><p>在配置伪分布式和分布式集群时，需要修改安装目录下 conf 文件夹中相关的配置文件，主要涉及以下两个文件，同时需要将这些配置文件分发到集群中的各个 <a target="_blank" rel="noopener" href="http://c.biancheng.net/view/6513.html">Regionserver</a> 节点。</p>
+<ul>
+<li>hbase-env.sh：配置 HBase 运行时的变量，如 Java路径、RegionServer 相关参数等。</li>
+<li>hbase-site.xml:在这个文件中可以添加 HBase 的相关配置，如分布式的模式、<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/6510.html">ZooKeeper</a> 的配置等。</li>
+</ul>
+<p>修改 hbase-env.sh 文件，配置 Java 的运行环境，将其中的 JAVA_HOME 指向 Java 的安装目录，编辑 hbase-env.sh 文件，添加下面这一行代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/j ava/j dkl.8.0_161</span><br></pre></td></tr></table></figure>
+
+<p>另外，ZooKeeper 可以作为 HBase 的一部分来管理启动，即 ZooKeeper 随着 HBase 的启动而启动，随其关闭而关闭，这时需要在 hbase-env.sh 中设置 HBASE_MANAGES_ZK 变量，即添加下面这一行代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HBASE_MANAGES_ZK=true</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当然 ZooKeeper 也可以作为独立的集群来运行，即完全与 HBase 脱离关系，这时需要设置 HBASE_MANAGES_ZK 变量为 false。</p>
+<p>hbase-site.xml配置和说明如下</p>
+<p><img src="/./Paas/image-20220307073839333-16466099210151.png" alt="image-20220307073839333"></p>
+<h3 id="3-1-2-启动与测试"><a href="#3-1-2-启动与测试" class="headerlink" title="3.1.2 启动与测试"></a>3.1.2 启动与测试</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start-hbase.sh</span><br></pre></td></tr></table></figure>
+
+<p>集群启动后使用JPS查看进程，使用hbase shell进入HBase执行数据库操作</p>
+<p><img src="/./Paas/image-20220307074151053-16466101121152.png" alt="image-20220307074151053"></p>
+<h2 id="3-2-Zookeeper"><a href="#3-2-Zookeeper" class="headerlink" title="3.2 Zookeeper"></a>3.2 Zookeeper</h2><p>初次使用 ZooKeeper 时, 需要将 $ZOOKEEPER_HOME&#x2F;conf 目录下的 zoo_sample.cfg 重命名为 zoo.cfg</p>
+<p>关键参数如下：</p>
+<p><img src="/./Paas/image-20220307095734802-16466182565143.png" alt="image-20220307095734802"></p>
+<p>以下由实际情况决定：</p>
+<p><img src="/./Paas/image-20220307100248201-16466185699584.png" alt="image-20220307100248201"></p>
+<h3 id="3-2-1-关于启动"><a href="#3-2-1-关于启动" class="headerlink" title="3.2.1 关于启动"></a>3.2.1 关于启动</h3><p>HBase会在启动时同时启动Zookeeper，也可手动启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh start</span><br><span class="line">zkCli.sh -server localhost:2181</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Paas/image-20220307101152396-16466191142345.png" alt="image-20220307101152396"></p>
+<h2 id="3-3-Hive"><a href="#3-3-Hive" class="headerlink" title="3.3 Hive"></a>3.3 Hive</h2><p>安装位置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/opt/env/apache-hive-1.2.1-bin</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-1-启动方法与前置要求"><a href="#3-3-1-启动方法与前置要求" class="headerlink" title="3.3.1 启动方法与前置要求"></a>3.3.1 启动方法与前置要求</h3><h4 id="3-3-1-1-hive-env-sh"><a href="#3-3-1-1-hive-env-sh" class="headerlink" title="3.3.1.1 hive-env.sh"></a>3.3.1.1 hive-env.sh</h4><p><img src="/./Paas/image-20220306083722331-16465270438591.png" alt="hive-env.sh"></p>
+<p>此处配置Hadoop所在路径</p>
+<h4 id="3-3-1-2-hive-site-xml"><a href="#3-3-1-2-hive-site-xml" class="headerlink" title="3.3.1.2 hive-site.xml"></a>3.3.1.2 hive-site.xml</h4><p><img src="/./Paas/image-20220306084303352.png" alt="hive-site.xml"></p>
+<h5 id="3-3-1-2-1-关于useSSL"><a href="#3-3-1-2-1-关于useSSL" class="headerlink" title="3.3.1.2.1 关于useSSL"></a>3.3.1.2.1 关于useSSL</h5><blockquote>
+<p>不建议在没有服务器身份验证的情况下建立SSL连接。根据MySQL 5.5.45+、5.6.26+和5.7.6+的要求，如果不设置显式选项，则必须建立默认的SSL连接。需要通过设置useSSL&#x3D;false来显式禁用SSL，或者设置useSSL&#x3D;true并为服务器证书验证提供信任存储。</p>
+</blockquote>
+<h5 id="3-3-1-2-2-关于其他参数"><a href="#3-3-1-2-2-关于其他参数" class="headerlink" title="3.3.1.2.2 关于其他参数"></a>3.3.1.2.2 关于其他参数</h5><p>现只列举几个重要的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8F%82%E6%95%B0&spm=1001.2101.3001.7020">参数</a>，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数说明</th>
+<th>缺省值</th>
+<th>最低版本要求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user</td>
+<td>数据库用户名（用于连接数据库）</td>
+<td></td>
+<td>所有版本</td>
+</tr>
+<tr>
+<td>password</td>
+<td>用户密码（用于连接数据库）</td>
+<td></td>
+<td>所有版本</td>
+</tr>
+<tr>
+<td>useUnicode</td>
+<td>是否使用Unicode字符集，如果参数characterEncoding设置为gb2312或gbk，本参数值必须设置为true</td>
+<td>false</td>
+<td>1.1g</td>
+</tr>
+<tr>
+<td>characterEncoding</td>
+<td>当useUnicode设置为true时，指定字符编码。比如可设置为gb2312或gbk</td>
+<td>false</td>
+<td>1.1g</td>
+</tr>
+<tr>
+<td>autoReconnect</td>
+<td>当数据库连接异常中断时，是否自动重新连接？</td>
+<td>false</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>autoReconnectForPools</td>
+<td>是否使用针对数据库连接池的重连策略</td>
+<td>false</td>
+<td>3.1.3</td>
+</tr>
+<tr>
+<td>failOverReadOnly</td>
+<td>自动重连成功后，连接是否设置为只读？</td>
+<td>true</td>
+<td>3.0.12</td>
+</tr>
+<tr>
+<td>maxReconnects</td>
+<td>autoReconnect设置为true时，重试连接的次数</td>
+<td>3</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>initialTimeout</td>
+<td>autoReconnect设置为true时，两次重连之间的时间间隔，单位：秒</td>
+<td>2</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>connectTimeout</td>
+<td>和数据库服务器建立socket连接时的超时，单位：毫秒。 0表示永不超时，适用于JDK 1.4及更高版本</td>
+<td>0</td>
+<td>3.0.1</td>
+</tr>
+<tr>
+<td>socketTimeout</td>
+<td>socket操作（读写）超时，单位：毫秒。 0表示永不超时</td>
+<td>0</td>
+<td>3.0.1</td>
+</tr>
+</tbody></table>
+<h4 id="3-3-1-3-初始化"><a href="#3-3-1-3-初始化" class="headerlink" title="3.3.1.3 初始化"></a>3.3.1.3 初始化</h4><p>应在启动hive前执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schematool -dbType mysql -initSchema</span><br></pre></td></tr></table></figure>
+
+<p>在hadoop01启动hive后，开启新的窗口，执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./hive --service hiveserver2</span><br><span class="line">./hive --service metastore</span><br></pre></td></tr></table></figure>
+
+<p>以便于集群的远程访问</p>
+<h3 id="3-3-2-远程访问"><a href="#3-3-2-远程访问" class="headerlink" title="3.3.2 远程访问"></a>3.3.2 远程访问</h3><p>将hive分发到集群，然后可使用<code>beeline</code>通过</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!connect jdbc:hive2://hadoop01:10000</span><br></pre></td></tr></table></figure>
+
+<p>输入数据库的用户和密码进行远程访问</p>
+<p><img src="/./Paas/image-20220306090200105-16465285219472.png" alt="image-20220306090200105"></p>
+<h1 id="四-应用"><a href="#四-应用" class="headerlink" title="四 应用"></a>四 应用</h1><ul>
+<li>Pig开发环境部署</li>
+<li>整合大数据相关组件，构建虚拟化操作系统OVF模板，为大数据教学提供IaaS层支撑</li>
+</ul>
+<h2 id="4-1-Pig"><a href="#4-1-Pig" class="headerlink" title="4.1 Pig"></a>4.1 Pig</h2><p>Pig包括两部分：</p>
+<ul>
+<li>用于描述数据流的语言，称为Pig Latin。</li>
+<li>用于执行Pig Latin程序的执行环境，当前有两个环境：单JVM中的本地执行环境和Hadoop集群上的分布式执行环境。</li>
+</ul>
+<p> Pig内部，每个操作或变换是对输入进行数据处理，然后产生输出结果，这些变换操作被转换成一系列MapReduce作业，Pig让程序员不需要知道这些转换具体是如何进行的，这样工程师可以将精力集中在数据上，而非执行的细节上。</p>
+<h3 id="4-1-1-本地模式"><a href="#4-1-1-本地模式" class="headerlink" title="4.1.1 本地模式"></a>4.1.1 本地模式</h3><p>Grunt是Pig的外壳程序（shell）。本地模式下，Pig运行在单个JVM中，访问本地文件系统，该模式用于测试或处理小规模数据集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop-namenodenew pig]# pig -x local</span><br><span class="line">grunt&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-1-2-MapReduce模式"><a href="#4-1-2-MapReduce模式" class="headerlink" title="4.1.2 MapReduce模式"></a>4.1.2 MapReduce模式</h3><p>在MapReduce模式下，Pig将查询翻译为MapReduce作业，然后在Hadoop集群上执行。Pig版本和Hadoop版本间有要求，这边的版本如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hadoop 2.10.1</span><br><span class="line">Pig 0.17.0</span><br></pre></td></tr></table></figure>
+
+<p>启动Pig之前，需要</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mr-jobhistory-daemon.sh start historyserver</span><br></pre></td></tr></table></figure>
+
+<p>否则会进入死循环</p>
+<p>启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pig -x mapreduce</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-示例"><a href="#4-2-示例" class="headerlink" title="4.2 示例"></a>4.2 示例</h3><h4 id="4-2-1-上传"><a href="#4-2-1-上传" class="headerlink" title="4.2.1 上传"></a>4.2.1 上传</h4><p>首先将<code>word.txt</code>上传至<code>hdfs</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -put word.txt /data/word.txt</span><br></pre></td></tr></table></figure>
+
+<p>word.txt的内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hello world hadoop</span><br><span class="line">hadoop hbase</span><br><span class="line">hbase hello</span><br><span class="line">hadoop</span><br><span class="line">hdfs hbase mapreduce</span><br><span class="line">hadoop hbase hive</span><br><span class="line">hello hive world</span><br><span class="line">mapreduce hdfs</span><br><span class="line">zookeeper mapreduce</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-2-加载数据到关系A"><a href="#4-2-2-加载数据到关系A" class="headerlink" title="4.2.2 加载数据到关系A"></a>4.2.2 加载数据到关系A</h4><p><img src="/./Paas/image-20220307104911024-16466213530766.png" alt="image-20220307104911024"></p>
+<h4 id="4-2-3-分析"><a href="#4-2-3-分析" class="headerlink" title="4.2.3 分析"></a>4.2.3 分析</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dump A;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Paas/image-20220307105039173-16466214402087.png" alt="image-20220307105039173"></p>
+<h4 id="4-2-4-将字符串拆分成单词到关系B"><a href="#4-2-4-将字符串拆分成单词到关系B" class="headerlink" title="4.2.4 将字符串拆分成单词到关系B"></a>4.2.4 将字符串拆分成单词到关系B</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B = foreach A generate flatten(TOKENIZE(line,&#x27; &#x27;)) as word;</span><br><span class="line">dump B;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Paas/image-20220307105422521-16466216637718.png" alt="image-20220307105422521"></p>
+<h4 id="4-2-5-归并"><a href="#4-2-5-归并" class="headerlink" title="4.2.5 归并"></a>4.2.5 归并</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C = group B by word;</span><br><span class="line">dump C;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Paas/image-20220307110049131-16466220503219.png" alt="image-20220307110049131"></p>
+<h4 id="4-2-6-词频分析"><a href="#4-2-6-词频分析" class="headerlink" title="4.2.6 词频分析"></a>4.2.6 词频分析</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D = foreach C generate group,COUNT(B);</span><br><span class="line">dump D;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./Paas/image-20220307110310189-164662219218310.png" alt="image-20220307110310189"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">StdAlone</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://sailikas.github.io/2022/03/22/hadoop%E9%85%8D%E7%BD%AE%E9%A1%B9/">https://sailikas.github.io/2022/03/22/hadoop%E9%85%8D%E7%BD%AE%E9%A1%B9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://sailikas.github.io" target="_blank">ECK`s Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%9B%86%E7%BE%A4/">集群</a><a class="post-meta__tags" href="/tags/hadoop/">hadoop</a><a class="post-meta__tags" href="/tags/%E9%85%8D%E7%BD%AE/">配置</a></div><div class="post_share"><div class="social-share" data-image="https://i0.hdslb.com/bfs/article/b28fc40e96ecf052215b2218e4a5b3b6e41ac4db.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/22/Pass/"><img class="prev-cover" src="https://i0.hdslb.com/bfs/article/b28fc40e96ecf052215b2218e4a5b3b6e41ac4db.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">hadoop配置项</div></div></a></div><div class="next-post pull-right"><a href="/2022/03/09/docker%E9%83%A8%E7%BD%B2Hadoop%E9%9B%86%E7%BE%A4/"><img class="next-cover" src="https://i0.hdslb.com/bfs/article/522e9a589550215591ae2168a21adfd45060bdb5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">docker部署Hadoop集群</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/03/22/Pass/" title="hadoop配置项"><img class="cover" src="https://i0.hdslb.com/bfs/article/b28fc40e96ecf052215b2218e4a5b3b6e41ac4db.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-22</div><div class="title">hadoop配置项</div></div></a></div><div><a href="/2022/03/09/hello-world/" title="Hello World"><img class="cover" src="http://i0.hdslb.com/bfs/article/a1531321e0cb0762b44421c99b8538030937dda8.jpg@942w_progressive.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-09</div><div class="title">Hello World</div></div></a></div><div><a href="/2022/03/09/docker%E9%83%A8%E7%BD%B2Hadoop%E9%9B%86%E7%BE%A4/" title="docker部署Hadoop集群"><img class="cover" src="https://i0.hdslb.com/bfs/article/522e9a589550215591ae2168a21adfd45060bdb5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-09</div><div class="title">docker部署Hadoop集群</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">StdAlone</div><div class="author-info__description">欢迎来到我的个人博客</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">emm..一天搭完？</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80-%E4%BF%A1%E6%81%AF"><span class="toc-number">1.</span> <span class="toc-text">一 信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C-%E9%9B%86%E7%BE%A4"><span class="toc-number">2.</span> <span class="toc-text">二 集群</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Hadoop%E5%9F%BA%E7%A1%80%E6%A8%A1%E6%9D%BF"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 Hadoop基础模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Hadoop%E9%9B%86%E7%BE%A4%E6%A8%A1%E6%9D%BF"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 Hadoop集群模板</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-core-site-xml%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.2.1 core-site.xml配置信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">配置说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-hdfs-site-xml%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2.2 hdfs-site.xml配置信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E-1"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">配置说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-mapred-site-xml%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.2.3 mapred-site.xml配置信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E-2"><span class="toc-number">2.2.3.1.</span> <span class="toc-text">配置说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-4-yarn-site-xml%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.4.</span> <span class="toc-text">2.2.4 yarn-site.xml配置信息</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E-3"><span class="toc-number">2.2.4.1.</span> <span class="toc-text">配置说明</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ResourceManager%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.4.1.1.</span> <span class="toc-text">ResourceManager相关配置参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#NodeManager%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.4.1.2.</span> <span class="toc-text">NodeManager相关配置参数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-5-salves%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.5.</span> <span class="toc-text">2.2.5 salves信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-6-%E8%BF%81%E7%A7%BB%E4%B8%8E%E9%83%A8%E7%BD%B2"><span class="toc-number">2.2.6.</span> <span class="toc-text">2.2.6 迁移与部署</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-6-1-%E8%BF%81%E7%A7%BB"><span class="toc-number">2.2.6.1.</span> <span class="toc-text">2.2.6.1 迁移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-6-2-%E9%83%A8%E7%BD%B2"><span class="toc-number">2.2.6.2.</span> <span class="toc-text">2.2.6.2 部署</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-7-DEMO"><span class="toc-number">2.2.7.</span> <span class="toc-text">2.2.7 DEMO</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-7-1-CRUD"><span class="toc-number">2.2.7.0.1.</span> <span class="toc-text">2.2.7.1 CRUD</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89-%E7%BB%84%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">三 组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-HBase"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 HBase</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-HBase-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">3.1.1.</span> <span class="toc-text">3.1.1 HBase 的安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-1-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">3.1.1.1 修改配置文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E5%90%AF%E5%8A%A8%E4%B8%8E%E6%B5%8B%E8%AF%95"><span class="toc-number">3.1.2.</span> <span class="toc-text">3.1.2 启动与测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Zookeeper"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 Zookeeper</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-%E5%85%B3%E4%BA%8E%E5%90%AF%E5%8A%A8"><span class="toc-number">3.2.1.</span> <span class="toc-text">3.2.1 关于启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Hive"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 Hive</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-1-%E5%90%AF%E5%8A%A8%E6%96%B9%E6%B3%95%E4%B8%8E%E5%89%8D%E7%BD%AE%E8%A6%81%E6%B1%82"><span class="toc-number">3.3.1.</span> <span class="toc-text">3.3.1 启动方法与前置要求</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-1-hive-env-sh"><span class="toc-number">3.3.1.1.</span> <span class="toc-text">3.3.1.1 hive-env.sh</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-2-hive-site-xml"><span class="toc-number">3.3.1.2.</span> <span class="toc-text">3.3.1.2 hive-site.xml</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-1-2-1-%E5%85%B3%E4%BA%8EuseSSL"><span class="toc-number">3.3.1.2.1.</span> <span class="toc-text">3.3.1.2.1 关于useSSL</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-1-2-2-%E5%85%B3%E4%BA%8E%E5%85%B6%E4%BB%96%E5%8F%82%E6%95%B0"><span class="toc-number">3.3.1.2.2.</span> <span class="toc-text">3.3.1.2.2 关于其他参数</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-3-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.3.1.3.</span> <span class="toc-text">3.3.1.3 初始化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-2-%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE"><span class="toc-number">3.3.2.</span> <span class="toc-text">3.3.2 远程访问</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B-%E5%BA%94%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">四 应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-Pig"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 Pig</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-1-%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.1.</span> <span class="toc-text">4.1.1 本地模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-2-MapReduce%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.2.</span> <span class="toc-text">4.1.2 MapReduce模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.1.3.</span> <span class="toc-text">4.2 示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-%E4%B8%8A%E4%BC%A0"><span class="toc-number">4.1.3.1.</span> <span class="toc-text">4.2.1 上传</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E5%88%B0%E5%85%B3%E7%B3%BBA"><span class="toc-number">4.1.3.2.</span> <span class="toc-text">4.2.2 加载数据到关系A</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-3-%E5%88%86%E6%9E%90"><span class="toc-number">4.1.3.3.</span> <span class="toc-text">4.2.3 分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-4-%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8B%86%E5%88%86%E6%88%90%E5%8D%95%E8%AF%8D%E5%88%B0%E5%85%B3%E7%B3%BBB"><span class="toc-number">4.1.3.4.</span> <span class="toc-text">4.2.4 将字符串拆分成单词到关系B</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-5-%E5%BD%92%E5%B9%B6"><span class="toc-number">4.1.3.5.</span> <span class="toc-text">4.2.5 归并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-6-%E8%AF%8D%E9%A2%91%E5%88%86%E6%9E%90"><span class="toc-number">4.1.3.6.</span> <span class="toc-text">4.2.6 词频分析</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/03/22/Pass/" title="hadoop配置项"><img src="https://i0.hdslb.com/bfs/article/b28fc40e96ecf052215b2218e4a5b3b6e41ac4db.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hadoop配置项"/></a><div class="content"><a class="title" href="/2022/03/22/Pass/" title="hadoop配置项">hadoop配置项</a><time datetime="2022-03-22T15:54:09.000Z" title="发表于 2022-03-22 23:54:09">2022-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/22/hadoop%E9%85%8D%E7%BD%AE%E9%A1%B9/" title="hadoop配置项2"><img src="https://i0.hdslb.com/bfs/article/b28fc40e96ecf052215b2218e4a5b3b6e41ac4db.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hadoop配置项2"/></a><div class="content"><a class="title" href="/2022/03/22/hadoop%E9%85%8D%E7%BD%AE%E9%A1%B9/" title="hadoop配置项2">hadoop配置项2</a><time datetime="2022-03-22T15:43:05.000Z" title="发表于 2022-03-22 23:43:05">2022-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/09/docker%E9%83%A8%E7%BD%B2Hadoop%E9%9B%86%E7%BE%A4/" title="docker部署Hadoop集群"><img src="https://i0.hdslb.com/bfs/article/522e9a589550215591ae2168a21adfd45060bdb5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="docker部署Hadoop集群"/></a><div class="content"><a class="title" href="/2022/03/09/docker%E9%83%A8%E7%BD%B2Hadoop%E9%9B%86%E7%BE%A4/" title="docker部署Hadoop集群">docker部署Hadoop集群</a><time datetime="2022-03-09T14:44:53.000Z" title="发表于 2022-03-09 22:44:53">2022-03-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/03/09/hello-world/" title="Hello World"><img src="http://i0.hdslb.com/bfs/article/a1531321e0cb0762b44421c99b8538030937dda8.jpg@942w_progressive.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2022/03/09/hello-world/" title="Hello World">Hello World</a><time datetime="2022-03-09T08:50:57.703Z" title="发表于 2022-03-09 16:50:57">2022-03-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By StdAlone</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Algolia</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'FmXXPeb1fc1AMaix5zeSHnav-gzGzoHsz',
+      appKey: 'BJjw1l4qeQAkr4OeJy9Hc2Jp',
+      avatar: 'mp',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, {"placeholder":"发一条友善的评论...","recordIP":true}))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1.5,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/Kiana.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-10},"mobile":{"show":false,"scale":1},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"dialog":{"hitokoto":true},"log":false});</script></body></html>
